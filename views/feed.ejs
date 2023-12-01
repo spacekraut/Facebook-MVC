@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+
+    <p>Add a post</p>
+    <form action="/feed" method="post">
+   
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+        <label for="message">Message</label>
+        <input type="text" id="message" name="message" >
+    
+        <button type="submit">Post</button>
+    </form>
+   
+    <div>
+        <% if(feeds.length>0){ %>
+            <% feeds.forEach(feed=> {%>
+                
+                <a class="single" href="/feeds/<%= feed._id %> ">
+                <h2><%= feed.name %></h2>
+                <p><%= feed.message %></p>
+                <h5><%= feed.create_at %></h5>
+            </a>
+               
+                <% })%>
+                <%} else{ %>
+                    <p> There is nothing</p>
+                <% } %>
+    </div>
+    
+</body>
+</html>
