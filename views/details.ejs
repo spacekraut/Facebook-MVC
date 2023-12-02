@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+    <div>
+        <h2><%= feed.name %></h2>
+        <div>
+            <p><%= feed.message %></p>
+        </div>
+        <a class="delete" href="/" data-doc="<%= feed._id %>">delete</a>
+    </div>
+    <script>
+        const deleteBtn = document.querySelector('a.delete')
+        deleteBtn.addEventListener('click', (e) => {
+          const endpoint = `/feeds/${deleteBtn.dataset.doc}`
+
+          fetch(endpoint,{
+            method: 'DELETE'
+          })
+            .then((response) => response.json())
+            .then((data)=> { window.location.href = data.redirect})
+            .catch(err=> console.log(err)); 
+        })
+    </script>
+    
+</body>
+</html>
